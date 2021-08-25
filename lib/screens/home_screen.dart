@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/custom_icons_icons.dart';
+import 'package:my_portfolio/utils/icon/custom_icons_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,43 +56,51 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(0xff0474B3))),
-          child: Row(
-            children: [Icon(CustomIcons.linkedin_squared), Text('LinkedIn')],
-          ),
-          onPressed: () {
-            launch("https://www.linkedin.com/in/chtkb/");
-          },
-        ),
-        normalVerticalSpace,
-        ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(0xff252A2E))),
-          child: Row(
-            children: [Icon(CustomIcons.github_circled), Text('GitHub')],
-          ),
-          onPressed: () {
-            launch("https://github.com/hesty");
-          },
-        ),
-        normalVerticalSpace,
-        ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(0xff1EA1F1))),
-          child: Row(
-            children: [Icon(CustomIcons.twitter_squared), Text('Twitter')],
-          ),
-          onPressed: () {
-            launch("https://twitter.com/KarabogaCihat");
-          },
-        ),
+        contactButton(
+            title: Text('LinkedIn'),
+            color: Color(0xff0474B3),
+            icon: Icon(
+              CustomIcons.linkedin_squared,
+            ),
+            link: 'https://www.linkedin.com/in/chtkb/'),
+        _normalVerticalSpace,
+        contactButton(
+            title: Text('GitHub'),
+            color: Color(0xff252A2E),
+            icon: Icon(
+              CustomIcons.github_circled,
+            ),
+            link: 'https://github.com/hesty'),
+        _normalVerticalSpace,
+        contactButton(
+            title: Text('Twitter'),
+            color: Color(0xff1EA1F1),
+            icon: Icon(
+              CustomIcons.twitter_squared,
+            ),
+            link: 'https://twitter.com/KarabogaCihat'),
       ],
     );
   }
 
-  Widget get normalVerticalSpace => SizedBox(
+  Widget contactButton({
+    @required Icon icon,
+    @required Text title,
+    @required Color color,
+    @required String link,
+  }) {
+    return ElevatedButton(
+      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(color)),
+      child: Row(
+        children: [icon, title],
+      ),
+      onPressed: () {
+        launch(link);
+      },
+    );
+  }
+
+  Widget get _normalVerticalSpace => SizedBox(
         width: MediaQuery.of(context).size.width * .02,
       );
 
