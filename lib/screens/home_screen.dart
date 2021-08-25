@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
             gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment(0.8, 0.0),
-          colors: [const Color(0xff183940), const Color(0xff1B2B41)],
+          colors: [const Color(0xff00bf8f), const Color(0xFF1B443A)],
         )),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -47,7 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 20,
         ),
         _buildContactRow(),
-        //_buildCreatedTag()
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .1,
+        ),
+        _buildCreatedTag()
       ],
     );
   }
@@ -84,15 +87,24 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget contactButton({
-    @required Icon icon,
-    @required Text title,
-    @required Color color,
-    @required String link,
+    required Icon icon,
+    required Text title,
+    required Color color,
+    required String link,
   }) {
     return ElevatedButton(
-      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(color)),
+      style: ButtonStyle(
+          elevation: MaterialStateProperty.all(5),
+          backgroundColor: MaterialStateProperty.all(color),
+          padding: MaterialStateProperty.all(EdgeInsets.all(20))),
       child: Row(
-        children: [icon, title],
+        children: [
+          icon,
+          SizedBox(
+            width: 10,
+          ),
+          title
+        ],
       ),
       onPressed: () {
         launch(link);
@@ -122,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSubtitle() {
     return Text(
-      "Softare Enginner Students. Flutter Developer.\nPart time Musician.",
+      "Mobile Developer with experience Flutter.\nI’m a software engineer student.\n Part time musician.",
       style: TextStyle(
         color: Colors.white70,
         fontSize: 18,
@@ -131,24 +143,23 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Widget _buildCreatedTag() {
-  //   return Row(
-  //     crossAxisAlignment: CrossAxisAlignment.end,
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: [
-  //       Icon(
-  //         Icons.copyright,
-  //         color: Colors.greenAccent,
-  //       ),
-  //       SizedBox(
-  //         width: 10,
-  //       ),
-  //       Text(
-  //         "Created By Hesty with Flutter",
-  //         style: TextStyle(color: Colors.greenAccent),
-  //       ),
-  //     ],
-  //   );
-  // }
-
+  Widget _buildCreatedTag() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.copyright,
+          color: Colors.greenAccent,
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          "Created with Flutter",
+          style: TextStyle(color: Colors.greenAccent),
+        ),
+      ],
+    );
+  }
 }
